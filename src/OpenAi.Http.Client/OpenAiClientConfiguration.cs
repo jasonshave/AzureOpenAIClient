@@ -1,4 +1,7 @@
-﻿namespace OpenAi.Http.Client
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
+namespace OpenAi.Http.Client
 {
     public class OpenAiClientConfiguration
     {

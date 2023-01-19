@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace OpenAi.Http.Client
