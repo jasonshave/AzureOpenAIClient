@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureOpenAIClient", "src\AzureOpenAIClient.Http\AzureOpenAIClient.Http.csproj", "{596FA726-561C-4E83-AC31-FB8CC16A96D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureOpenAIClient.Http", "src\AzureOpenAIClient.Http\AzureOpenAIClient.Http.csproj", "{596FA726-561C-4E83-AC31-FB8CC16A96D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
