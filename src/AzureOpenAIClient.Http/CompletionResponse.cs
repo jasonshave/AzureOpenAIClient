@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
 
-namespace OpenAi.Http.Client
+using System.Collections.Generic;
+
+namespace AzureOpenAIClient.Http
 {
     public sealed class CompletionResponse
     {

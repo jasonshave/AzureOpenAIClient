@@ -1,8 +1,10 @@
-﻿using System;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class CompletionRequest
     {

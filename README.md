@@ -1,1 +1,3 @@
-# OpenAi.Http
+# Azure OpenAI Client
+
+docs coming soon...

@@ -1,0 +1,23 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+        <RootNamespace>$(MsBuildProjectName)</RootNamespace>
+        <RunCodeAnalysis>false</RunCodeAnalysis>
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)rulesets\stylecop.ruleset</CodeAnalysisRuleSet>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<DebugType>Full</DebugType>
+		<Nullable>enable</Nullable>
+        <Authors>jasonshave@hotmail.com</Authors>
+        <Company>Jason Shave</Company>
+        <Copyright>Copyright © Jason Shave 2022</Copyright>
+    </PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)rulesets\stylecop.json" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.4.0" />
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          </PackageReference>
+	</ItemGroup>
+</Project>

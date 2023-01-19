@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -6,14 +9,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
-    public sealed class OpenAiClient
+    public sealed class OpenAIClient
     {
-        private readonly OpenAiHttpClient _openAiHttpClient;
-        private readonly ILogger<OpenAiClient> _logger;
+        private readonly OpenAIHttpClient _openAiHttpClient;
+        private readonly ILogger<OpenAIClient> _logger;
 
-        public OpenAiClient(OpenAiHttpClient openAiHttpClient, ILogger<OpenAiClient> logger)
+        public OpenAIClient(OpenAIHttpClient openAiHttpClient, ILogger<OpenAIClient> logger)
         {
             _openAiHttpClient = openAiHttpClient;
             _logger = logger;
@@ -47,7 +50,6 @@ namespace OpenAi.Http.Client
 
                 throw new ApplicationException(
                     $"There was a problem processing the request: {responseMessage.ReasonPhrase}");
-
             }
             catch (ApplicationException e)
             {
