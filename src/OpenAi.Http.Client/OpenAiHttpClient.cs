@@ -2,7 +2,7 @@
 using System;
 using System.Net.Http;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class OpenAiHttpClient
     {

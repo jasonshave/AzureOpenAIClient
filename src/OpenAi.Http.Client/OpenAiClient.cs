@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class OpenAiClient
     {

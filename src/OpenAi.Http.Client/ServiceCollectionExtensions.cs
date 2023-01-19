@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public static class ServiceCollectionExtensions
     {

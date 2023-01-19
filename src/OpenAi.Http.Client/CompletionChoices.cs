@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class CompletionChoices
     {

@@ -1,4 +1,4 @@
-﻿namespace OpenAi.Http.Client
+﻿namespace AzureOpenAIClient.Http
 {
     public class OpenAiClientConfiguration
     {

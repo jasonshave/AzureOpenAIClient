@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class CompletionResponse
     {
