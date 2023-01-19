@@ -8,7 +8,7 @@ namespace AzureOpenAIClient.Http
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddOpenAiClient(this IServiceCollection services, string baseUri, string apiKey, string deploymentName, string apiVersion)
+        public static IServiceCollection AddOpenAIClient(this IServiceCollection services, string baseUri, string apiKey, string deploymentName, string apiVersion)
         {
             ConfigureCommon(services, new OpenAIClientConfiguration()
             {
@@ -20,7 +20,7 @@ namespace AzureOpenAIClient.Http
             return services;
         }
 
-        public static IServiceCollection AddOpenAiClient(this IServiceCollection services, Action<OpenAIClientConfiguration> option)
+        public static IServiceCollection AddOpenAIClient(this IServiceCollection services, Action<OpenAIClientConfiguration> option)
         {
             var openAiHttpClientConfiguration = new OpenAIClientConfiguration();
             option(openAiHttpClientConfiguration);
