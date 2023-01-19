@@ -1,6 +1,9 @@
-﻿namespace AzureOpenAIClient.Http
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
+namespace AzureOpenAIClient.Http
 {
-    public class OpenAiClientConfiguration
+    public class OpenAIClientConfiguration
     {
         public string BaseUri { get; set; }
         public string ApiKey { get; set; }

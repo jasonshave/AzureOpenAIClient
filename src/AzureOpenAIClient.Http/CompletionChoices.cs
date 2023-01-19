@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
+using System.Text.Json.Serialization;
 
 namespace AzureOpenAIClient.Http
 {

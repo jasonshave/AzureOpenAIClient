@@ -1,14 +1,16 @@
-﻿using Microsoft.Net.Http.Headers;
+﻿// Copyright (c) 2022 Jason Shave. All rights reserved.
+// Licensed under the MIT License.
+
 using System;
 using System.Net.Http;
 
 namespace AzureOpenAIClient.Http
 {
-    public sealed class OpenAiHttpClient
+    public sealed class OpenAIHttpClient
     {
         public HttpClient HttpClient { get; }
 
-        public OpenAiHttpClient(HttpClient httpClient, OpenAiClientConfiguration openAiClientConfiguration)
+        public OpenAIHttpClient(HttpClient httpClient, OpenAIClientConfiguration openAiClientConfiguration)
         {
             HttpClient = httpClient;
             HttpClient.BaseAddress = new Uri($"{openAiClientConfiguration.BaseUri}openai/deployments/{openAiClientConfiguration.DeploymentName}/completions?api-version={openAiClientConfiguration.ApiVersion}");
