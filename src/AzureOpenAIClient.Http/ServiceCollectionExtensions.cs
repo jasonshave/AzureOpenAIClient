@@ -4,13 +4,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddOpenAiClient(this IServiceCollection services, string baseUri, string apiKey, string deploymentName, string apiVersion)
         {
-            ConfigureCommon(services, new OpenAiClientConfiguration()
+            ConfigureCommon(services, new OpenAIClientConfiguration()
             {
                 ApiKey = apiKey,
                 BaseUri = baseUri,
@@ -20,21 +20,21 @@ namespace OpenAi.Http.Client
             return services;
         }
 
-        public static IServiceCollection AddOpenAiClient(this IServiceCollection services, Action<OpenAiClientConfiguration> option)
+        public static IServiceCollection AddOpenAiClient(this IServiceCollection services, Action<OpenAIClientConfiguration> option)
         {
-            var openAiHttpClientConfiguration = new OpenAiClientConfiguration();
+            var openAiHttpClientConfiguration = new OpenAIClientConfiguration();
             option(openAiHttpClientConfiguration);
 
             ConfigureCommon(services, openAiHttpClientConfiguration);
             return services;
         }
 
-        private static void ConfigureCommon(IServiceCollection services, OpenAiClientConfiguration openAiClientConfiguration)
+        private static void ConfigureCommon(IServiceCollection services, OpenAIClientConfiguration openAiClientConfiguration)
         {
             services.AddSingleton(openAiClientConfiguration);
-            services.AddSingleton<OpenAiClient>();
+            services.AddSingleton<OpenAIClient>();
 
-            services.AddHttpClient<OpenAiHttpClient>();
+            services.AddHttpClient<OpenAIHttpClient>();
         }
     }
 }

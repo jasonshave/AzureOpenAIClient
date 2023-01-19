@@ -4,13 +4,13 @@
 using System;
 using System.Net.Http;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
-    public sealed class OpenAiHttpClient
+    public sealed class OpenAIHttpClient
     {
         public HttpClient HttpClient { get; }
 
-        public OpenAiHttpClient(HttpClient httpClient, OpenAiClientConfiguration openAiClientConfiguration)
+        public OpenAIHttpClient(HttpClient httpClient, OpenAIClientConfiguration openAiClientConfiguration)
         {
             HttpClient = httpClient;
             HttpClient.BaseAddress = new Uri($"{openAiClientConfiguration.BaseUri}openai/deployments/{openAiClientConfiguration.DeploymentName}/completions?api-version={openAiClientConfiguration.ApiVersion}");

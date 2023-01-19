@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace OpenAi.Http.Client
+namespace AzureOpenAIClient.Http
 {
     public sealed class CompletionRequest
     {
