@@ -7,7 +7,7 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <icon>icon.png</icon>
-    <projectUrl>https://github.com/jasonshave/AzureOpenAiClient</projectUrl>
+    <projectUrl>https://github.com/jasonshave/AzureOpenAIClient</projectUrl>
     <readme>README.md</readme>
     <description>A .NET SDK for Azure's OpenAI resource including contracts for serialization of requests and deserialization of results.</description>
     <releaseNotes>Initial release.</releaseNotes>
