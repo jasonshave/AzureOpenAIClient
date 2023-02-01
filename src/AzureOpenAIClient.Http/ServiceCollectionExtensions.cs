@@ -15,7 +15,7 @@ namespace AzureOpenAIClient.Http
                 ApiKey = apiKey,
                 BaseUri = baseUri,
                 DeploymentName = deploymentName,
-                ApiVersion = apiVersion
+                ApiVersion = apiVersion,
             });
             return services;
         }
@@ -33,7 +33,6 @@ namespace AzureOpenAIClient.Http
         {
             services.AddSingleton(openAiClientConfiguration);
             services.AddSingleton<OpenAIClient>();
-
             services.AddHttpClient<OpenAIHttpClient>();
         }
     }
