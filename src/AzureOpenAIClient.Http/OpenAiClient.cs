@@ -28,7 +28,7 @@ namespace AzureOpenAIClient.Http
         /// </summary>
         /// <param name="input"></param>
         /// <returns>A <see cref="CompletionResponse"/>.</returns>
-        public async ValueTask<CompletionResponse?> GetTextCompletionResponse(CompletionRequest input)
+        public async ValueTask<CompletionResponse?> GetTextCompletionResponseAsync(CompletionRequest input)
         {
             CompletionResponse? response = default;
             try
