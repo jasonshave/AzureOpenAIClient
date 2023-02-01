@@ -22,6 +22,12 @@ namespace AzureOpenAIClient.Http
             _logger = logger;
         }
 
+        /// <summary>
+        /// Use this method to send an OpenAI <see cref="CompletionRequest"/> using the built-in <see cref="HttpClient"/>.
+        /// Serialization and deserialization of the request is handled automatically.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>A <see cref="CompletionResponse"/>.</returns>
         public async ValueTask<CompletionResponse?> GetTextCompletionResponse(CompletionRequest input)
         {
             CompletionResponse? response = default;
@@ -44,22 +50,14 @@ namespace AzureOpenAIClient.Http
                     {
                         PropertyNameCaseInsensitive = true
                     });
-
-                    return response;
                 }
-
-                throw new ApplicationException(
-                    $"There was a problem processing the request: {responseMessage.ReasonPhrase}");
-            }
-            catch (ApplicationException e)
-            {
-                throw;
             }
             catch (Exception e)
             {
                 _logger.LogError(e.Message, e);
-                throw;
             }
+
+            return response;
         }
     }
 }

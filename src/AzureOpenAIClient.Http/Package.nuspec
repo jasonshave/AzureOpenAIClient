@@ -11,7 +11,7 @@
     <readme>README.md</readme>
     <description>A .NET SDK for Azure's OpenAI resource including contracts for serialization of requests and deserialization of results.</description>
     <releaseNotes>Initial release.</releaseNotes>
-    <copyright>Copyright 2023</copyright>
+    <copyright>Copyright Jason Shave 2023</copyright>
     <version>1.0.0</version>
     <tags>OpenAI JasonShave Azure</tags>
   </metadata>
