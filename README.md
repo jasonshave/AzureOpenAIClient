@@ -39,11 +39,11 @@ Since the `OpenAIClient` is registered for Dependency Injection, you can inject 
 ```csharp
 public class MyClass
 {
-    private readonly OpenAIClient _client;
+    private readonly OpenAIClient _openAiClient;
 
     public MyClass(OpenAIClient client)
     {
-        _client = client;
+        _openAiClient = client;
     }
 
     Task DoWork(string input)
