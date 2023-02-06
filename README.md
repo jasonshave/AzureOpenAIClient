@@ -57,3 +57,6 @@ public class MyClass
     }        
 }
 ```
+## Community Links
+
+[Blazor and Azure OpenAI](https://blazorhelpwebsite.com/ViewBlogPost/2065)
