@@ -9,10 +9,10 @@
     <icon>icon.png</icon>
     <projectUrl>https://github.com/jasonshave/AzureOpenAIClient</projectUrl>
     <readme>README.md</readme>
-    <description>A .NET SDK for Azure's OpenAI resource including contracts for serialization of requests and deserialization of results.</description>
+    <description>An unofficial .NET client library for Azure's OpenAI resource including contracts for serialization of requests and deserialization of results. For the official Azure.AI.OpenAI NuGet package, please use: https://www.nuget.org/packages/Azure.AI.OpenAI.</description>
     <releaseNotes>Initial release.</releaseNotes>
     <copyright>Copyright Jason Shave 2023</copyright>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <tags>OpenAI JasonShave Azure</tags>
   </metadata>
   <files>

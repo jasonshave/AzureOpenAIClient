@@ -1,6 +1,8 @@
 # Azure OpenAI .NET Client
 
-This project contains an implementation of a pre-configured injectable `OpenAIClient` which can be used to communicate to the Azure OpenAI platform instead of relying purely on hand-crafted REST API calls.
+This project contains a .NET client library for use with Azure's OpenAI resource. It contains an implementation of a pre-configured injectable `OpenAIClient` which can be used to communicate to the Azure OpenAI platform instead of relying purely on hand-crafted REST API calls.
+
+> NOTE: For the official Azure.AI.OpenAI NuGet package, please use [this one](https://www.nuget.org/packages/Azure.AI.OpenAI).
 
 ## OpenAIClient settings
 
