@@ -13,7 +13,6 @@ The following settings allow the OpenAI client to connect to your Azure resource
 | BaseUri | The fully qualified domain name of the OpenAI resource in Azure. | `https://myai.openai.azure.com/` |
 | ApiKey | The API key used to authenticate the client to OpenAI in Azure. | `1bbcc11a3a233857zz12aa5f2fake99af7d9c` |
 | DeploymentName | The name of the deployment for a given OpenAI model. | `text-davinci-002` |
-| ApiVersion | The API version for your OpenAI resource. | `2022-12-01` |
 
 ## Configuration
 
@@ -23,8 +22,7 @@ The section below shows an example JSON configuration which can be stored in you
 "OpenAiClientConfiguration": {
     "BaseUri": "[your_fqdn]",
     "ApiKey": "[your_api_key]",
-    "DeploymentName": "[your_deployment_name]",
-    "ApiVersion": "[supported_api_version]"
+    "DeploymentName": "[your_deployment_name]"
 }
 ```
 
@@ -41,24 +39,44 @@ Since the `OpenAIClient` is registered for Dependency Injection, you can inject 
 ```csharp
 public class MyClass
 {
-    private readonly OpenAIClient _openAiClient;
+    private readonly OpenAIClient _client;
 
     public MyClass(OpenAIClient client)
     {
-        _openAiClient = client;
+        _client = client;
     }
 
     Task DoWork(string input)
     {
         var completionRequest = new CompletionRequest()
-            {
-                Prompt = input,
-                MaxTokens = 100
-            };
-        CompletionResponse? completionResponse = await _openAiClient.GetTextCompletionResponseAsync(completionRequest);            
+        {
+            Prompt = input,
+            MaxTokens = 100
+        };
+        CompletionResponse? completionResponse = await _client.GetTextCompletionResponseAsync(completionRequest);
     }        
 }
 ```
+
+## Streaming support
+
+The client now supports streaming using `IAsyncEnumerable<CompletionResponse?>` and can be iterated using the `await foreach` pattern as follows:
+
+```csharp
+// inject the OpenAIClient and call streaming method
+var completionRequest = new CompletionRequest()
+{
+    Prompt = input,
+    MaxTokens = 100
+};
+var stream = _client.StreamTextCompletionResponseAsync(completionRequest);
+
+await foreach (var completionResponse in stream)
+{
+    Console.Write(completionResponse.Choices.FirstOrDefault().Text);
+}
+```
+
 ## Community Links
 
 [Blazor and Azure OpenAI](https://blazorhelpwebsite.com/ViewBlogPost/2065)

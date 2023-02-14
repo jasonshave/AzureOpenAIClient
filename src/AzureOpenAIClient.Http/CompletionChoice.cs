@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace AzureOpenAIClient.Http
 {
-    public sealed class CompletionChoices
+    public sealed class CompletionChoice
     {
         /// <summary>
         /// The API text returned from the request.
