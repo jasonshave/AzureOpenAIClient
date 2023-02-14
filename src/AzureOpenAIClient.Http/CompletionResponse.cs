@@ -30,6 +30,6 @@ namespace AzureOpenAIClient.Http
         /// <summary>
         /// A list of responses.
         /// </summary>
-        public List<CompletionChoices> Choices { get; set; } = new List<CompletionChoices>();
+        public List<CompletionChoice> Choices { get; set; } = new List<CompletionChoice>();
     }
 }
