@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -32,27 +33,20 @@ namespace AzureOpenAIClient.Http
         /// <returns>A <see cref="CompletionResponse"/>.</returns>
         public async ValueTask<CompletionResponse?> GetTextCompletionResponseAsync(CompletionRequest completionRequest)
         {
-            completionRequest.Stream = false;
             CompletionResponse? response = default;
             try
             {
-                var httpRequest = new HttpRequestMessage(HttpMethod.Post, _openAiHttpClient.HttpClient.BaseAddress);
-
-                var jsonRequest = JsonSerializer.Serialize(completionRequest, new JsonSerializerOptions()
+                completionRequest.Stream = false;
+                var httpResponseMessage = await SendAsync(completionRequest);
+                if (httpResponseMessage.IsSuccessStatusCode)
                 {
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                });
-                httpRequest.Content = new StringContent(jsonRequest);
-                httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                var responseMessage = await _openAiHttpClient.HttpClient.SendAsync(httpRequest);
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var stringResult = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var stringResult = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
                     response = JsonSerializer.Deserialize<CompletionResponse>(stringResult, new JsonSerializerOptions()
                     {
                         PropertyNameCaseInsensitive = true,
                     });
+
+                    _logger.LogDebug($"Finish reason: {response.Choices.FirstOrDefault().FinishReason}");
                 }
             }
             catch (Exception e)
@@ -71,6 +65,32 @@ namespace AzureOpenAIClient.Http
         public async IAsyncEnumerable<CompletionResponse?> StreamTextCompletionResponseAsync(CompletionRequest completionRequest)
         {
             completionRequest.Stream = true;
+            var httpResponseMessage = await SendAsync(completionRequest);
+            if (httpResponseMessage.Content.Headers.ContentType.MediaType != "text/event-stream") yield break;
+
+            await using var stream = await httpResponseMessage.Content.ReadAsStreamAsync();
+            using var reader = new StreamReader(stream);
+
+            while (!reader.EndOfStream)
+            {
+                var line = await reader.ReadLineAsync();
+                if (!string.IsNullOrEmpty(line) && line != "data: [DONE]")
+                {
+                    var formattedLine = line.Replace("data:", "");
+                    var response = JsonSerializer.Deserialize<CompletionResponse>(formattedLine, new JsonSerializerOptions()
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    });
+
+                    _logger.LogDebug($"Finish reason: {response.Choices.FirstOrDefault().FinishReason}");
+
+                    yield return response;
+                }
+            }
+        }
+
+        private async Task<HttpResponseMessage?> SendAsync(CompletionRequest completionRequest)
+        {
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, _openAiHttpClient.HttpClient.BaseAddress);
 
             var jsonRequest = JsonSerializer.Serialize(completionRequest, new JsonSerializerOptions()
@@ -80,27 +100,8 @@ namespace AzureOpenAIClient.Http
             httpRequest.Content = new StringContent(jsonRequest);
             httpRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var responseMessage = await _openAiHttpClient.HttpClient.SendAsync(httpRequest);
-            if (responseMessage.Content.Headers.ContentType.MediaType == "text/event-stream")
-            {
-                await using var stream = await responseMessage.Content.ReadAsStreamAsync();
-                using var reader = new StreamReader(stream);
-
-                while (!reader.EndOfStream)
-                {
-                    var line = await reader.ReadLineAsync();
-                    if (!string.IsNullOrEmpty(line) && line != "data: [DONE]")
-                    {
-                        var formattedLine = line.Replace("data:", "");
-                        var response = JsonSerializer.Deserialize<CompletionResponse>(formattedLine, new JsonSerializerOptions()
-                        {
-                            PropertyNameCaseInsensitive = true,
-                        });
-
-                        yield return response;
-                    }
-                }
-            }
+            var httpResponseMessage = await _openAiHttpClient.HttpClient.SendAsync(httpRequest);
+            return httpResponseMessage;
         }
     }
 }
